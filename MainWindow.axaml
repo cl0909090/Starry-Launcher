@@ -1,0 +1,133 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:anim="using:Avalonia.Animation"
+        xmlns:local="using:StarryLauncher"
+        xmlns:loc="clr-namespace:StarryLauncher"
+        xmlns:chrome="clr-namespace:Avalonia.Controls.Chrome;assembly=Avalonia.Controls"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="860"
+        x:Class="StarryLauncher.MainWindow"
+        Title="Starry Launcher"
+        Icon="avares://StarryLauncher/Assets/app.png"
+        Width="1280" Height="860" MinWidth="900" MinHeight="620"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        TransparencyBackgroundFallback="#F2FFFBFE"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="38"
+        WindowDecorations="Full"
+        Background="{StaticResource WinBgBrush}">
+
+    <Panel PointerMoved="OnNavMoved" PointerReleased="OnNavReleased" PointerCaptureLost="OnNavCaptureLost">
+
+        <Panel x:Name="PageBgLayer" IsHitTestVisible="False" ClipToBounds="True">
+            <Image x:Name="PageBgBack" Stretch="UniformToFill" IsHitTestVisible="False"
+                   RenderTransformOrigin="0.5,0.5" Opacity="0.97">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="1.18" ScaleY="1.18"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="PageBgImage" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5"/>
+        </Panel>
+
+        <Panel.Resources>
+            <anim:CrossFade x:Key="PageFade" Duration="0:0:0.4"/>
+        </Panel.Resources>
+
+        <Grid RowDefinitions="56,*" Margin="0,4,0,0">
+
+            <Grid Grid.Row="0" x:Name="TitleBar" ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+                  Margin="24,0,8,0" Background="Transparent"
+                  PointerPressed="OnTitleBarPointerPressed" DoubleTapped="OnTitleBarDoubleTapped">
+
+                <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center" Margin="80,8,0,0">
+                    <Border Width="38" Height="38" CornerRadius="19" ClipToBounds="True">
+                        <Image x:Name="TopBarAvatar" Width="38" Height="38" Stretch="UniformToFill"/>
+                    </Border>
+                    <TextBlock x:Name="GreetingText" FontSize="16" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceBrush}"/>
+                </StackPanel>
+
+                <Border Grid.Column="3" Width="4"/>
+
+                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <Button x:Name="CapMin" Classes="caption" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10"
+                            chrome:WindowDecorationProperties.ElementRole="MinimizeButton"
+                            Content="&#xE921;" Click="OnMinimizeClick"/>
+                    <Button x:Name="CapMax" Classes="caption" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10"
+                            chrome:WindowDecorationProperties.ElementRole="MaximizeButton"
+                            Content="&#xE922;" Click="OnMaximizeClick"/>
+                    <Button x:Name="CapClose" Classes="caption captionClose" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton"
+                            Content="&#xE8BB;" Click="OnCloseClick"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" x:Name="ContentGrid" ColumnDefinitions="100,*">
+
+                <Grid RowDefinitions="*,*" Grid.Column="0">
+                    <Panel x:Name="NavRailPanel" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="6,0,0,8"
+                           PointerPressed="OnNavPressed" RenderTransformOrigin="0.5,1" RenderTransform="scale(1)">
+
+                        <Border Height="202" CornerRadius="34" Background="{StaticResource PadCardBrush}" BorderBrush="{StaticResource PadBorderBrush}"
+                                BorderThickness="1">
+
+                            <Panel x:Name="NavPillPanel">
+                                <ExperimentalAcrylicBorder x:Name="NavAcrylic" CornerRadius="34" IsHitTestVisible="False">
+                                    <ExperimentalAcrylicBorder.Material>
+                                        <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                                                      TintColor="#F2FFFFFF" TintOpacity="0.85"
+                                                                      MaterialOpacity="0.5"/>
+                                    </ExperimentalAcrylicBorder.Material>
+                                </ExperimentalAcrylicBorder>
+                                <StackPanel Spacing="6" Margin="6,10">
+                                    <Button x:Name="NavLauncher" Classes="nav" Click="OnNavClick" Tag="launcher" ToolTip.Tip="{loc:Lang nav.launcherTip}"/>
+                                    <Button x:Name="NavModpack" Classes="nav" Click="OnNavClick" Tag="modpack" ToolTip.Tip="{loc:Lang nav.modpackTip}"/>
+                                    <Button x:Name="NavSettings" Classes="nav" Click="OnNavClick" Tag="settings" ToolTip.Tip="{loc:Lang nav.settings}"/>
+                                </StackPanel>
+
+                                <Border x:Name="NavIndicator" Width="56" Height="56"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"
+                                        RenderTransform="translateY(0px)">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25">
+                                                <TransformOperationsTransition.Easing>
+                                                    <local:MildBackEase/>
+                                                </TransformOperationsTransition.Easing>
+                                            </TransformOperationsTransition>
+                                        </Transitions>
+                                    </Border.Transitions>
+                                    <Border x:Name="NavIndicatorScale" CornerRadius="28"
+                                            Background="{DynamicResource NavBallBrush}" BorderThickness="1.2"
+                                            RenderTransform="scale(1)">
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#66FFFFFF" Offset="0"/>
+                                                <GradientStop Color="#11FFFFFF" Offset="0.5"/>
+                                                <GradientStop Color="#44FFFFFF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <Border.Transitions>
+                                            <Transitions>
+                                                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+                                            </Transitions>
+                                        </Border.Transitions>
+                                    </Border>
+                                </Border>
+                            </Panel>
+                        </Border>
+                    </Panel>
+                </Grid>
+
+                <TransitioningContentControl Grid.Column="1" x:Name="PageHost" Margin="8,4,24,12"
+                                             PageTransition="{StaticResource PageFade}"/>
+            </Grid>
+
+        </Grid>
+
+        <Border x:Name="ThemeFx" Opacity="0" IsHitTestVisible="False"/>
+
+    </Panel>
+</Window>

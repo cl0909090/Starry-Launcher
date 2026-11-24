@@ -1,0 +1,345 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StarryLauncher.App"
+             RequestedThemeVariant="Light">
+
+    <Application.Resources>
+
+        <Color x:Key="M3Primary">#6750A4</Color>
+        <Color x:Key="M3PrimaryDark">#4F3B82</Color>
+        <Color x:Key="M3PrimaryLight">#EADDFF</Color>
+        <Color x:Key="M3PrimaryDarkText">#21005D</Color>
+        <Color x:Key="M3SecondaryLight">#E8DEF8</Color>
+        <Color x:Key="M3SecondaryHover">#DACEEE</Color>
+        <Color x:Key="M3Surface">#FFFBFE</Color>
+        <Color x:Key="M3OnSurface">#1C1B1F</Color>
+        <Color x:Key="M3OnSurfaceVar">#49454F</Color>
+        <Color x:Key="M3Outline">#79747E</Color>
+        <Color x:Key="M3OutlineVar">#CAC4D0</Color>
+        <Color x:Key="M3Success">#22B470</Color>
+        <Color x:Key="M3Warning">#F1C40F</Color>
+        <Color x:Key="M3Danger">#E85252</Color>
+        <Color x:Key="M3FieldSurface">#F4F1F7</Color>
+        <Color x:Key="M3LogSurface">#D3EFE8</Color>
+        <Color x:Key="M3LogText">#5C6B70</Color>
+
+        <LinearGradientBrush x:Key="PrimaryBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="{StaticResource M3Primary}" Offset="0"/>
+            <GradientStop Color="{StaticResource M3Primary}" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource M3PrimaryDark}"/>
+        <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource M3PrimaryLight}"/>
+        <SolidColorBrush x:Key="PrimaryDarkTextBrush" Color="{StaticResource M3PrimaryDarkText}"/>
+        <SolidColorBrush x:Key="SecondaryLightBrush" Color="{StaticResource M3SecondaryLight}"/>
+        <SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource M3SecondaryHover}"/>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource M3Surface}"/>
+        <SolidColorBrush x:Key="OnSurfaceBrush" Color="{StaticResource M3OnSurface}"/>
+        <SolidColorBrush x:Key="OnSurfaceVarBrush" Color="{StaticResource M3OnSurfaceVar}"/>
+        <SolidColorBrush x:Key="OutlineBrush" Color="{StaticResource M3Outline}"/>
+        <SolidColorBrush x:Key="OutlineVarBrush" Color="{StaticResource M3OutlineVar}"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource M3Success}"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource M3Danger}"/>
+        <SolidColorBrush x:Key="FieldSurfaceBrush" Color="{StaticResource M3FieldSurface}"/>
+        <SolidColorBrush x:Key="LogSurfaceBrush" Color="{StaticResource M3LogSurface}"/>
+        <SolidColorBrush x:Key="LogTextBrush" Color="{StaticResource M3LogText}"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#BAFFFFFF"/>
+        <SolidColorBrush x:Key="AcrylicTintBrush" Color="#8CFFFBFE"/>
+        <SolidColorBrush x:Key="NavBallBrush" Color="#336750A4"/>
+
+        <SolidColorBrush x:Key="TintSurfaceBrush" Color="#E6F3EDFB"/>
+        <SolidColorBrush x:Key="TintHoverBrush" Color="#2AE8DEF8"/>
+
+        <SolidColorBrush x:Key="WinBgBrush" Color="#99FFFBFE"/>
+        <SolidColorBrush x:Key="PadBrush" Color="#E6FFFFFF"/>
+        <SolidColorBrush x:Key="PadSoftBrush" Color="#66FFFFFF"/>
+        <SolidColorBrush x:Key="PadCardBrush" Color="#D9FFFFFF"/>
+        <SolidColorBrush x:Key="PadStrongBrush" Color="#F2FFFFFF"/>
+        <SolidColorBrush x:Key="PadBorderBrush" Color="#40FFFFFF"/>
+        <SolidColorBrush x:Key="OutlinedBgBrush" Color="#F4F1F7"/>
+        <SolidColorBrush x:Key="DangerBgBrush" Color="#FCE8E8"/>
+        <SolidColorBrush x:Key="DangerHoverBrush" Color="#F8D7D7"/>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme/>
+
+        <Style Selector="Button">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.primary:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+        <Style Selector="Button.tonal:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+        <Style Selector="Button.outlined:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+
+        <Style Selector="Button.nav:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+
+        <Style Selector="FlyoutPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+        </Style>
+
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="MinHeight" Value="44"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
+
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.tonal">
+            <Setter Property="Background" Value="{StaticResource SecondaryLightBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryDarkTextBrush}"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="MinHeight" Value="44"/>
+        </Style>
+        <Style Selector="Button.tonal:pointerover /template/ ContentPresenter">
+
+            <Setter Property="Background" Value="{StaticResource SecondaryHoverBrush}"/>
+        </Style>
+
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="{StaticResource DangerBgBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="MinHeight" Value="44"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource DangerHoverBrush}"/>
+        </Style>
+
+        <Style Selector="Button.outlined">
+            <Setter Property="Background" Value="{StaticResource OutlinedBgBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OutlineVarBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="MinHeight" Value="44"/>
+        </Style>
+
+        <Style Selector="Button.nav">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource OnSurfaceVarBrush}"/>
+            <Setter Property="CornerRadius" Value="28"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="56"/>
+            <Setter Property="Height" Value="56"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource TintHoverBrush}"/>
+        </Style>
+
+        <Style Selector="Button.nav.raised">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+
+        <Style Selector="Button.swatch">
+            <Setter Property="Width" Value="34"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="CornerRadius" Value="17"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.swatch:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+
+        <Style Selector="FlyoutPresenter">
+            <Setter Property="Background" Value="{StaticResource PadStrongBrush}"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderBrush" Value="#22000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="MaxWidth" Value="Infinity"/>
+        </Style>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="28,22"/>
+
+            <Setter Property="BoxShadow" Value="0 6 20 -6 #18000000"/>
+        </Style>
+
+        <Style Selector="Border.lift">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.lift:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+        <Style Selector="Button.lift">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.lift:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+
+        <Style Selector="TextBox.field">
+            <Setter Property="Background" Value="{StaticResource FieldSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.modeBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.modeBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.modeBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="Button.caption">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="42"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource OnSurfaceVarBrush}"/>
+        </Style>
+        <Style Selector="Button.caption /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.caption:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1E000000"/>
+        </Style>
+        <Style Selector="Button.captionClose:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+        </Style>
+        <Style Selector="Button.captionClose:pointerover">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBox.log">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource LogTextBrush}"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+        </Style>
+        <Style Selector="TextBox.log /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+        <Style Selector="TextBox.log:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+        <Style Selector="TextBox.log:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+        <Style Selector="TextBox.log:focus-within /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+        <Style Selector="TextBox.log /template/ ScrollViewer">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="ToggleSwitch">
+            <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover /template/ Grid#SwitchAreaGrid">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pressed /template/ Grid#SwitchAreaGrid">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover /template/ Border#OuterBorder">
+            <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOff}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ToggleSwitchStrokeOff}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover /template/ Border#SwitchKnobBounds">
+            <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOn}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ToggleSwitchStrokeOn}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover /template/ Ellipse#SwitchKnobOff">
+            <Setter Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOff}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover /template/ Ellipse#SwitchKnobOn">
+            <Setter Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOn}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pressed /template/ Border#OuterBorder">
+            <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOff}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ToggleSwitchStrokeOff}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pressed /template/ Border#SwitchKnobBounds">
+            <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOn}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ToggleSwitchStrokeOn}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pressed /template/ Ellipse#SwitchKnobOff">
+            <Setter Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOff}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:pressed /template/ Ellipse#SwitchKnobOn">
+            <Setter Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOn}"/>
+        </Style>
+    </Application.Styles>
+</Application>

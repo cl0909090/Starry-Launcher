@@ -1,0 +1,208 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:StarryLauncher"
+             x:Class="StarryLauncher.Views.LauncherView">
+    <UserControl.Styles>
+
+        <Style Selector="Border.instCard">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.instCard:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+        <Style Selector="Border.instCard.sel">
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1.4"/>
+        </Style>
+
+        <Style Selector="Button.iconbtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource OnSurfaceVarBrush}"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.iconbtn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1E000000"/>
+        </Style>
+        <Style Selector="Button.iconbtn:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+    </UserControl.Styles>
+    <Panel>
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled">
+
+    <Grid x:Name="Root">
+
+        <Grid ColumnDefinitions="340,8,*">
+
+            <Border Grid.Column="0" Classes="card" Margin="0,12,0,0">
+                <Grid RowDefinitions="Auto,*,Auto">
+
+                    <TextBlock Grid.Row="0" x:Name="MethodHeader" Text="" FontSize="13" FontWeight="Medium"
+                               HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Top"
+                               Foreground="{StaticResource OnSurfaceVarBrush}"/>
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center">
+
+                            <Canvas Width="72" Height="72" HorizontalAlignment="Center">
+                                <Image x:Name="AvatarFace" Width="64" Height="64" Canvas.Left="4" Canvas.Top="4"
+                                       Stretch="Fill" RenderOptions.BitmapInterpolationMode="None"/>
+                                <Image x:Name="AvatarHat" Width="72" Height="72" Canvas.Left="0" Canvas.Top="0"
+                                       Stretch="Fill" RenderOptions.BitmapInterpolationMode="None"/>
+                            </Canvas>
+                            <TextBlock x:Name="NameText" Text="{loc:Lang launcher.status.notlogin}" FontSize="18" FontWeight="Bold"
+                                       HorizontalAlignment="Center" Margin="0,12,0,0"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+
+                        <StackPanel x:Name="LoginPanel" Margin="0,24,0,0" Spacing="8">
+                            <TextBlock Text="{loc:Lang launcher.loginType.microsoft}" FontSize="13"
+                                       Foreground="{StaticResource OnSurfaceVarBrush}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,16,0,0"
+                                    HorizontalAlignment="Center">
+                            <Button x:Name="LoginBtn" Classes="primary" MinHeight="44" MinWidth="110" Content="{loc:Lang launcher.login}" Click="OnLogin"/>
+                            <Button x:Name="SwitchBtn" Classes="tonal" MinHeight="44" MinWidth="110" Content="{loc:Lang launcher.account.switch}" Click="OnSwitchAccount"/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="StatusText" Text="" FontSize="12.5" TextWrapping="Wrap"
+                                   TextAlignment="Center" HorizontalAlignment="Center" Margin="0,8,0,0"
+                                   Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="0,14,0,10">
+
+                        <Button x:Name="PlayBtn" Classes="primary" MinHeight="58" HorizontalAlignment="Stretch"
+                                Click="OnPlay">
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <TextBlock Text="{loc:Lang launcher.play}" FontSize="15" FontWeight="SemiBold"
+                                           HorizontalAlignment="Center" Foreground="White"/>
+
+                                <TextBlock x:Name="GameNameText" Text="" FontSize="11.5" FontWeight="Normal"
+                                           HorizontalAlignment="Center" MaxWidth="290" Margin="0,3,0,0"
+                                           TextTrimming="CharacterEllipsis" TextAlignment="Center"
+                                           Foreground="#D9FFFFFF"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="StopBtn" Classes="tonal" MinHeight="44" HorizontalAlignment="Stretch"
+                                Margin="0,10,0,0" Content="{loc:Lang launcher.stop}" Click="OnStop" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Classes="card" Margin="0,12,0,0">
+                <Grid RowDefinitions="Auto,*">
+
+                    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+                        <Image x:Name="InstTitleIcon" Width="22" Height="22" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock x:Name="InstTitle" Grid.Column="1" Text="{loc:Lang launcher.instanceCard}" FontSize="16" FontWeight="SemiBold"
+                                   VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceBrush}"/>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+
+                            <Button x:Name="PathPickBtn" Classes="tonal" MinHeight="34" Padding="14,4" Click="OnOpenPathPick">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Image x:Name="PathPickBtnIcon" Width="18" Height="18" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Lang launcher.pathPick}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button x:Name="GameLogBtn" Classes="tonal" MinHeight="34" Padding="14,4" Click="OnOpenGameLog">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Image x:Name="GameLogBtnIcon" Width="18" Height="18" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{loc:Lang log.title}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" Margin="0,12,0,0">
+                        <StackPanel x:Name="InstList" Spacing="10" Margin="0,0,0,4"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+    </ScrollViewer>
+
+    <Border x:Name="LogDim" IsVisible="False" Background="Transparent" Tapped="OnLogDimTapped"/>
+    <Border x:Name="LogDrawer" IsVisible="False" Width="520" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+            Margin="0,0,2,0" CornerRadius="20" Background="Transparent"
+            BorderBrush="#40FFFFFF" BorderThickness="1"
+            BoxShadow="0 8 28 0 #2E000000" ClipToBounds="True">
+        <Panel>
+            <Border x:Name="LogDrawerWhiteBg" IsVisible="False" CornerRadius="20" Background="{StaticResource PadBrush}"/>
+            <ExperimentalAcrylicBorder x:Name="LogDrawerAcrylic" CornerRadius="20" IsHitTestVisible="False">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                                  TintColor="#F2FFFFFF" TintOpacity="0.85"
+                                                  MaterialOpacity="0.5"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            <Grid RowDefinitions="Auto,*" Margin="18">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,12">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <Image x:Name="LogDrawerIcon" Width="20" Height="20" VerticalAlignment="Center"/>
+                        <TextBlock Text="{loc:Lang log.title}" FontSize="17" FontWeight="SemiBold"
+                                   VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceBrush}"/>
+                    </StackPanel>
+                    <Button x:Name="BtnLogCopy" Grid.Column="1" Classes="outlined" MinHeight="34" MinWidth="104"
+                            Margin="0,0,10,0" Content="{loc:Lang btn.copyLog}" Click="OnLogCopyClick"/>
+                    <Button Grid.Column="2" Classes="iconbtn" Click="OnLogDrawerCloseClick">
+                        <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Text="&#xE711;"/>
+                    </Button>
+                </Grid>
+                <Border Grid.Row="1" CornerRadius="12" ClipToBounds="True" Padding="12"
+                        Background="{StaticResource PadSoftBrush}">
+                    <TextBox x:Name="LogDrawerBox" Classes="log" IsReadOnly="True" FontSize="12"
+                             AcceptsReturn="True" TextWrapping="Wrap"/>
+                </Border>
+            </Grid>
+        </Panel>
+    </Border>
+
+    <Border x:Name="PathPickDim" IsVisible="False" Background="Transparent" Tapped="OnPathPickDimTapped"/>
+    <Border x:Name="PathPickPanel" IsVisible="False" Width="460" MaxHeight="560"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            CornerRadius="18" Background="Transparent" BorderBrush="#40FFFFFF" BorderThickness="1"
+            BoxShadow="0 8 28 0 #2E000000" ClipToBounds="True">
+        <Panel>
+            <Border x:Name="PathPickWhiteBg" IsVisible="False" CornerRadius="18" Background="{StaticResource PadBrush}"/>
+            <ExperimentalAcrylicBorder x:Name="PathPickAcrylic" CornerRadius="18" IsHitTestVisible="False">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                                  TintColor="#F2FFFFFF" TintOpacity="0.9"
+                                                  MaterialOpacity="0.6"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            <Grid RowDefinitions="Auto,*,Auto" Margin="18">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                    <TextBlock Text="{loc:Lang launcher.pathPick}" FontSize="17" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceBrush}"/>
+                    <Button Grid.Column="1" Classes="iconbtn" Click="OnPathPickClose">
+                        <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Text="&#xE711;"/>
+                    </Button>
+                </Grid>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto" MaxHeight="360">
+                    <StackPanel x:Name="PathPickList" Spacing="4"/>
+                </ScrollViewer>
+                <Button x:Name="PathPickDone" Grid.Row="2" Classes="primary" MinHeight="40" HorizontalAlignment="Stretch"
+                        Margin="0,14,0,0" Content="{loc:Lang btn.ok}" Click="OnPathPickClose"/>
+            </Grid>
+        </Panel>
+    </Border>
+    </Panel>
+</UserControl>

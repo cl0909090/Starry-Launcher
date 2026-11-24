@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="using:StarryLauncher"
+             x:Class="StarryLauncher.Views.ModpackView">
+
+  <Grid Margin="0,12,0,0">
+
+    <Grid ColumnDefinitions="160,*" Margin="0,0,0,0">
+
+      <Border Grid.Column="0" Background="{StaticResource CardBrush}" CornerRadius="16"
+              Padding="10,8" Margin="0,0,10,0">
+        <Panel x:Name="TabPanel">
+
+          <Border x:Name="TabIndicator" CornerRadius="14"
+                  Background="{StaticResource SecondaryLightBrush}"
+                  IsHitTestVisible="False" IsVisible="False"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                  Height="0"
+                  RenderTransform="translateY(0px)"/>
+          <StackPanel x:Name="TabButtons" Orientation="Vertical" Spacing="2"/>
+        </Panel>
+      </Border>
+
+      <Grid Grid.Column="1" RowDefinitions="Auto,Auto,*">
+
+        <Border Grid.Row="0" x:Name="FilterCard" Classes="card" Padding="14,12" Margin="0,0,0,10">
+          <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
+            <Grid Grid.Row="0" x:Name="FilterRow1" ColumnDefinitions="Auto,*,Auto,190">
+              <TextBlock Grid.Column="0" Text="{loc:Lang modpack.f.search}" FontSize="13" Margin="0,0,10,0"
+                         VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+              <Panel x:Name="SearchHost" Grid.Column="1" Height="34">
+
+                <TextBox x:Name="SearchBox" PlaceholderText=""
+                         MinHeight="34" CornerRadius="17" Padding="32,0,12,0" VerticalContentAlignment="Center"/>
+                <Image x:Name="SearchIcon" Width="16" Height="16" Margin="13,0,0,0"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       IsHitTestVisible="False" Opacity="0.65"/>
+              </Panel>
+              <TextBlock x:Name="SourceLabel" Grid.Column="2" Text="{loc:Lang modpack.f.source}" FontSize="13" Margin="14,0,10,0"
+                         VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+              <ComboBox x:Name="SourceCombo" Grid.Column="3" MinHeight="34" VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"/>
+
+              <ComboBox x:Name="VanillaCatCombo" Grid.Column="3" MinHeight="34" VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch" IsVisible="False"/>
+            </Grid>
+
+            <Grid Grid.Row="1" x:Name="FilterRow2" ColumnDefinitions="Auto,*,Auto,Auto,Auto,190">
+              <TextBlock x:Name="Row2Label" Grid.Column="0" Text="{loc:Lang modpack.f.version}" FontSize="13" Margin="0,0,10,0"
+                         VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+
+              <ComboBox x:Name="VersionCombo" Grid.Column="1" IsEditable="True" MinHeight="34"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                        PlaceholderText="{loc:Lang modpack.f.all}"/>
+
+              <ComboBox x:Name="DlSrcCombo" Grid.Column="1" Width="240" MinHeight="34" VerticalContentAlignment="Center"
+                        HorizontalAlignment="Left" IsVisible="False"/>
+              <TextBlock x:Name="LoaderLabel" Grid.Column="2" Text="{loc:Lang modpack.f.loader}" FontSize="13" Margin="14,0,10,0"
+                         VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+              <ComboBox x:Name="LoaderCombo" Grid.Column="3" Width="140" MinHeight="34" VerticalContentAlignment="Center"/>
+              <TextBlock x:Name="TypeLabel" Grid.Column="4" Text="{loc:Lang modpack.f.type}" FontSize="13" Margin="14,0,10,0"
+                         VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+              <ComboBox x:Name="TypeCombo" Grid.Column="5" MinHeight="34" VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch" PlaceholderText="{loc:Lang modpack.f.allType}"/>
+            </Grid>
+          </Grid>
+        </Border>
+
+        <ProgressBar x:Name="LoadBar" Grid.Row="1" IsIndeterminate="True" Height="4" MinHeight="4"
+                     CornerRadius="2" Margin="0,0,0,10" IsVisible="False">
+          <ProgressBar.Foreground>
+            <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+              <GradientStop Color="#4F7CFF" Offset="0"/>
+              <GradientStop Color="#8A5CF6" Offset="1"/>
+            </LinearGradientBrush>
+          </ProgressBar.Foreground>
+        </ProgressBar>
+
+        <ScrollViewer x:Name="ListScroll" Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
+                      ScrollChanged="OnListScroll">
+          <StackPanel Spacing="10">
+
+            <Border x:Name="StatusCard" Classes="card" IsVisible="False">
+              <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                <TextBlock x:Name="StatusText" FontSize="13"
+                           Foreground="{DynamicResource OnSurfaceVarBrush}"
+                           VerticalAlignment="Center"/>
+                <Button x:Name="RetryBtn" Classes="mpGhost" Click="OnRetryClick">
+                  <TextBlock Text="{loc:Lang modpack.retry}" FontSize="13"/>
+                </Button>
+              </StackPanel>
+            </Border>
+            <StackPanel x:Name="CardList" Spacing="10"/>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>
+    </Grid>
+  </Grid>
+
+  <UserControl.Styles>
+
+    <Style Selector="Button.tabPill">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="14,11"/>
+      <Setter Property="FontSize" Value="14.5"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+    <Style Selector="Button.tabPill:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource TintHoverBrush}"/>
+    </Style>
+    <Style Selector="Button.tabPill:pointerover">
+      <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+    </Style>
+
+    <Style Selector="Border#TabIndicator">
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25">
+            <TransformOperationsTransition.Easing>
+              <loc:MildBackEase/>
+            </TransformOperationsTransition.Easing>
+          </TransformOperationsTransition>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.mpGhost">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
+      <Setter Property="BorderThickness" Value="1.4"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="Padding" Value="16,6"/>
+      <Setter Property="MinHeight" Value="34"/>
+      <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+    </Style>
+    <Style Selector="Button.mpGhost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#14888888"/>
+      <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="Border.mpCard">
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.mpCard:pointerover">
+      <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+    </Style>
+  </UserControl.Styles>
+</UserControl>

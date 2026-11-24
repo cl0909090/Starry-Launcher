@@ -1,0 +1,357 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:StarryLauncher"
+             x:Class="StarryLauncher.Views.SettingsView">
+    <UserControl.Styles>
+
+        <Style Selector="Button.tabCard">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="18,12"/>
+            <Setter Property="FontSize" Value="14.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style Selector="Button.tabCard:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource TintHoverBrush}"/>
+        </Style>
+
+        <Style Selector="Button.tabCard:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-1.5px)"/>
+        </Style>
+        <Style Selector="Border.card">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.card:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <Grid RowDefinitions="*" Margin="0,12,0,0">
+
+        <Grid ColumnDefinitions="300,*">
+
+            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="10" Margin="0,0,12,8">
+
+                    <Border Classes="card" Padding="18,14">
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <Button x:Name="BtnAvatar" Classes="lift" Width="64" Height="64" CornerRadius="32"
+                                    Padding="0" Background="Transparent">
+
+                                <Border CornerRadius="32" ClipToBounds="True" Width="64" Height="64">
+                                    <Image x:Name="ImgIdentityAvatar" Width="64" Height="64" Stretch="UniformToFill"/>
+                                </Border>
+                            </Button>
+                            <StackPanel VerticalAlignment="Center" Spacing="3">
+                                <Button x:Name="BtnIdentityName" Background="Transparent" Padding="0"
+                                        FontSize="17" FontWeight="SemiBold"
+                                        Foreground="{StaticResource OnSurfaceBrush}"/>
+                                <TextBlock Text="{loc:Lang set.identity.hint}" FontSize="11.5"
+                                           Foreground="{StaticResource OnSurfaceVarBrush}"/>
+
+                                <Button x:Name="BtnMcFace" HorizontalAlignment="Left" Padding="8,2"
+                                        CornerRadius="8" Background="{StaticResource SecondaryLightBrush}">
+                                    <TextBlock Text="{loc:Lang set.identity.mcface}" FontSize="11"
+                                               Foreground="{StaticResource PrimaryBrush}"/>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{StaticResource CardBrush}" CornerRadius="16"
+                            Padding="10,8" Margin="0,2,0,0" HorizontalAlignment="Stretch">
+                        <Panel x:Name="TabPanel"
+                               PointerPressed="OnTabPressed" PointerMoved="OnTabMoved"
+                               PointerReleased="OnTabReleased" PointerCaptureLost="OnTabCaptureLost">
+
+                            <Border x:Name="TabIndicator" CornerRadius="14"
+                                    Background="{StaticResource SecondaryLightBrush}"
+                                    IsHitTestVisible="False" IsVisible="False"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                    Height="0" Margin="0,0,0,0"
+                                    RenderTransform="translateY(0px)">
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25">
+                                            <TransformOperationsTransition.Easing>
+                                                <loc:MildBackEase/>
+                                            </TransformOperationsTransition.Easing>
+                                        </TransformOperationsTransition>
+                                    </Transitions>
+                                </Border.Transitions>
+                            </Border>
+                            <StackPanel x:Name="TabList" Spacing="2">
+                                <Button x:Name="TabBtn0" Classes="tabCard" Content="{loc:Lang set.tab.appearance}" Tag="0" Click="OnTabClick"/>
+                                <Button x:Name="TabBtn1" Classes="tabCard" Content="{loc:Lang set.tab.general}" Tag="1" Click="OnTabClick"/>
+
+                                <Button x:Name="TabBtnSt" Classes="tabCard" Content="{loc:Lang set.tab.storage}" Tag="2" Click="OnTabClick"/>
+                            </StackPanel>
+                        </Panel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ContentControl Grid.Column="1" x:Name="TabHost" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+
+    <Panel x:Name="PageStorage" IsVisible="False">
+
+        <ScrollViewer x:Name="PageAppearance" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="16" Margin="0,0,0,8">
+
+                <Border Classes="card">
+                    <StackPanel Spacing="14">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="IcBgPage" Width="17" Height="17" VerticalAlignment="Center"/>
+                            <TextBlock Text="{loc:Lang set.bg.page}" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button x:Name="BtnPageBgPick" Classes="outlined" Content="{loc:Lang set.bg.pick}" MinWidth="136" MinHeight="44"/>
+                            <Button x:Name="BtnPageBgClear" Classes="tonal" MinWidth="44" MinHeight="44" ToolTip.Tip="{loc:Lang set.bg.clear}"/>
+                        </StackPanel>
+                        <Grid ColumnDefinitions="130,*,52">
+                            <TextBlock Text="{loc:Lang set.bg.blur}" FontSize="13" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                            <Slider Grid.Column="1" x:Name="SldPageBlur" Minimum="0" Maximum="40" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="ValPageBlur" FontSize="12" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="130,*,52">
+                            <TextBlock Text="{loc:Lang set.bg.visibility}" FontSize="13" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                            <Slider Grid.Column="1" x:Name="SldPageVis" Minimum="0" Maximum="100" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="ValPageVis" FontSize="12" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="130,*,52">
+                            <TextBlock Text="{loc:Lang set.bg.components}" FontSize="13" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                            <Slider Grid.Column="1" x:Name="SldCompOpacity" Minimum="0" Maximum="100" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="ValCompOpacity" FontSize="12" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card">
+                    <StackPanel Spacing="14">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="IcBgChat" Width="17" Height="17" VerticalAlignment="Center"/>
+                            <TextBlock Text="{loc:Lang set.bg.chat}" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button x:Name="BtnChatBgPick" Classes="outlined" Content="{loc:Lang set.bg.pick}" MinWidth="136" MinHeight="44"/>
+                            <Button x:Name="BtnChatBgClear" Classes="tonal" MinWidth="44" MinHeight="44" ToolTip.Tip="{loc:Lang set.bg.clear}"/>
+                        </StackPanel>
+                        <Grid ColumnDefinitions="130,*,52">
+                            <TextBlock Text="{loc:Lang set.bg.blur}" FontSize="13" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                            <Slider Grid.Column="1" x:Name="SldChatBlur" Minimum="0" Maximum="40" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="ValChatBlur" FontSize="12" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="130,*,52">
+                            <TextBlock Text="{loc:Lang set.bg.visibility}" FontSize="13" VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                            <Slider Grid.Column="1" x:Name="SldChatVis" Minimum="0" Maximum="100" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="ValChatVis" FontSize="12" HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="card">
+                    <StackPanel Spacing="14">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="AccentTitleIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                            <TextBlock Text="{loc:Lang set.accent.title}" FontSize="17" FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="10" x:Name="AccentSwatches">
+
+                            <Button Classes="swatch" Tag="6750A4" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="2196F3" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="26A69A" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="43A047" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="FB8C00" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="E53935" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="EC407A" Click="OnAccentPick"/>
+                            <Button Classes="swatch" Tag="3949AB" Click="OnAccentPick"/>
+
+                            <Button Classes="swatch" x:Name="SwatchCustom" Click="OnCustomColorClick">
+                                <Image Width="34" Height="34" Source="avares://StarryLauncher/Assets/ys.ico"/>
+                            </Button>
+                        </StackPanel>
+
+                        <TextBlock Text="{loc:Lang set.accent.gradient}" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource OnSurfaceBrush}" Margin="0,2,0,0"/>
+                        <StackPanel Orientation="Horizontal" Spacing="10" x:Name="GradientSwatches"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer x:Name="PageGeneral" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="16" Margin="0,0,0,8">
+
+                <Border Classes="card">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="TrayCardIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TrayCardTitle" Text="{loc:Lang settings.trayTitle}" FontSize="17" FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+                        <ToggleSwitch Grid.Column="1" x:Name="TrayToggle" HorizontalAlignment="Right"/>
+                    </Grid>
+                </Border>
+
+                <Border Classes="card">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Spacing="9">
+                                <Image x:Name="ThemeCardIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="ThemeCardTitle" Text="{loc:Lang settings.theme}" FontSize="17" FontWeight="Bold"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource OnSurfaceBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" x:Name="ThemeBox" MinWidth="140" MinHeight="36"
+                                  HorizontalAlignment="Right" VerticalAlignment="Center" SelectedIndex="1">
+                            <ComboBoxItem Content="{loc:Lang settings.themeDark}"/>
+                            <ComboBoxItem Content="{loc:Lang settings.themeLight}"/>
+                            <ComboBoxItem Content="{loc:Lang settings.themeSystem}"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+                <Border Classes="card">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="LangCardIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="LangCardTitle" Text="{loc:Lang settings.uiLanguage}" FontSize="17" FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" x:Name="LangBox" MinWidth="140" MinHeight="36"
+                                  HorizontalAlignment="Right" VerticalAlignment="Center" SelectedIndex="0">
+                            <ComboBoxItem Content="{loc:Lang lang.zhCN}"/>
+                            <ComboBoxItem Content="{loc:Lang lang.zhTW}"/>
+                            <ComboBoxItem Content="{loc:Lang lang.en}"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+
+                <Border Classes="card">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Spacing="2" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Image x:Name="FontCardIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="FontCardTitle" Text="{loc:Lang settings.font}" FontSize="17" FontWeight="Bold"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource OnSurfaceBrush}"/>
+                            </StackPanel>
+                            <TextBlock x:Name="FontCardHint" Text="{loc:Lang settings.fontHint}" FontSize="11" Margin="30,0,8,0"
+                                       TextWrapping="Wrap"
+                                       Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" x:Name="FontBox" MinWidth="220" MinHeight="36" MaxDropDownHeight="300"
+                                  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageStorageLoc" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="16" Margin="0,0,0,8">
+                <Border Classes="card">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Image x:Name="StCardIcon" Width="22" Height="22" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="StCardTitle" Text="{loc:Lang settings.mcPath}" FontSize="17" FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource OnSurfaceBrush}"/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="McPathCurrentLabel" FontSize="12" Opacity="0.8"
+                                   Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                        <StackPanel x:Name="McScanProgressHost" IsVisible="False" Spacing="6">
+                            <TextBlock x:Name="McScanStatus" FontSize="12" Foreground="{StaticResource OnSurfaceVarBrush}"/>
+                            <ProgressBar x:Name="McScanBar" Height="6" Minimum="0" Maximum="100" Value="0"
+                                         CornerRadius="3"/>
+                        </StackPanel>
+                        <Grid x:Name="McPathDropHost">
+                            <Button x:Name="McPathDropBtn" Classes="field" MinHeight="38" HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Left" Click="OnToggleMcPathDrop">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock x:Name="McPathCurrentText" Grid.Column="0" FontSize="13"
+                                               TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                                               FontSize="12" Text="&#xE70D;" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="BtnMcPathDetect" Classes="tonal" MinHeight="36" Padding="12,4"
+                                    VerticalAlignment="Center" Click="OnAutoDetectMcPaths">
+                                <TextBlock x:Name="BtnMcPathDetectText" FontSize="13" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button x:Name="BtnMcPathPick" Classes="tonal" MinHeight="36" Padding="12,4"
+                                    Click="OnPickMcPath" VerticalAlignment="Center"
+                                    ToolTip.Tip="{loc:Lang set.path.add}">
+                                <Image x:Name="BtnMcPathIcon" Width="17" Height="17"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Panel>
+
+    <Border x:Name="McPathDim" IsVisible="False" Background="Transparent" Tapped="OnMcPathDimTapped"/>
+    <Border x:Name="McPathOverlay" IsVisible="False" Width="520" MaxHeight="560"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            CornerRadius="18" Background="Transparent" BorderBrush="#40FFFFFF" BorderThickness="1"
+            BoxShadow="0 8 28 0 #2E000000" ClipToBounds="True">
+        <Panel>
+            <Border x:Name="McPathWhiteBg" IsVisible="False" CornerRadius="18" Background="{StaticResource PadBrush}"/>
+            <ExperimentalAcrylicBorder x:Name="McPathAcrylic" CornerRadius="18" IsHitTestVisible="False">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                                  TintColor="#F2FFFFFF" TintOpacity="0.9"
+                                                  MaterialOpacity="0.6"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            <Grid RowDefinitions="Auto,*,Auto" Margin="18">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                    <TextBlock Text="{loc:Lang set.path.current}" FontSize="17" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Foreground="{StaticResource OnSurfaceBrush}"/>
+                    <Button Grid.Column="1" Width="30" Height="30" Padding="0" Background="Transparent"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            Click="OnMcPathClose">
+                        <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Text="&#xE711;"
+                                   Foreground="{StaticResource OnSurfaceBrush}"/>
+                    </Button>
+                </Grid>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                    <StackPanel x:Name="McPathPickerList" Spacing="4"/>
+                </ScrollViewer>
+                <Button x:Name="McPathDone" Grid.Row="2" Classes="primary" MinHeight="40" HorizontalAlignment="Stretch"
+                        Margin="0,14,0,0" Content="{loc:Lang btn.ok}" Click="OnMcPathClose"/>
+            </Grid>
+        </Panel>
+    </Border>
+    </Grid>
+</UserControl>
