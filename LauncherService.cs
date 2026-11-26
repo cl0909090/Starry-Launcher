@@ -425,7 +425,7 @@ public static class LauncherService
     {
         var st = AppSettings.Shared;
         RememberCurrentAccount();
-        if (!keepLoginType) st.McLoginType = "offline";
+        if (!keepLoginType) st.McLoginType = "microsoft";
         st.McUserName = "";
         st.McUuid = "";
         st.McAccessToken = "";
