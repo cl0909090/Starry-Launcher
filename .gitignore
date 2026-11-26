@@ -1,6 +1,6 @@
 bin/
 obj/
-publish/
+Starry Launcher/
 *.log
 cfdec.json
 cfsearch.json
