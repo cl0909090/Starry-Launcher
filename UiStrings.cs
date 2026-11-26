@@ -434,9 +434,6 @@ public static class S
         ["crash.hint"] = "详情见 logs 目录。",
 
 
-        ["stickerFilter"] = "图片与文档 (*.png;*.jpg;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf;*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.csv;*.log)|*.png;*.jpg;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf;*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.csv;*.log|图片文件 (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Word (*.doc;*.docx;*.dot;*.docm)|*.doc;*.docx;*.dot;*.docm|Excel (*.xls;*.xlsx;*.xlsm;*.csv)|*.xls;*.xlsx;*.xlsm;*.csv|PPT (*.ppt;*.pptx)|*.ppt;*.pptx|PDF (*.pdf)|*.pdf|文本与代码 (*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.log)|*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.log|所有文件 (*.*)|*.*",
-        ["emoji.importTip"] = "是否导入表情包？",
-        ["emoji.importDone"] = "表情包导入完成：新增 {0} 张，跳过 {1} 张（同名文件已存在）。",
         ["hist.rename"] = "重命名",
         ["hist.renameTip"] = "输入新的对话标题，回车保存，Esc 取消",
 
@@ -770,9 +767,6 @@ public static class S
         ["crash.hint"] = "See the logs folder for details.",
 
 
-        ["stickerFilter"] = "Images & Documents (*.png;*.jpg;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf;*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.csv;*.log)|*.png;*.jpg;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf;*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.csv;*.log|Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Word (*.doc;*.docx;*.dot;*.docm)|*.doc;*.docx;*.dot;*.docm|Excel (*.xls;*.xlsx;*.xlsm;*.csv)|*.xls;*.xlsx;*.xlsm;*.csv|PowerPoint (*.ppt;*.pptx)|*.ppt;*.pptx|PDF (*.pdf)|*.pdf|Text & Code (*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.log)|*.txt;*.py;*.cs;*.js;*.ts;*.java;*.c;*.cpp;*.h;*.json;*.xml;*.html;*.css;*.md;*.log|All files (*.*)|*.*",
-        ["emoji.importTip"] = "Import stickers?",
-        ["emoji.importDone"] = "Sticker import finished: {0} added, {1} skipped (same-name files already exist).",
         ["hist.rename"] = "Rename",
         ["hist.renameTip"] = "Type a new title. Enter to save, Esc to cancel",
 

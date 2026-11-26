@@ -10,7 +10,6 @@ internal static class SvgIcon
 
     private static readonly Dictionary<string, string> Files = new()
     {
-        ["ai"] = "ai",
         ["fz"] = "fz",
         ["fk"] = "fk",
         ["sz"] = "sz",
@@ -36,7 +35,6 @@ internal static class SvgIcon
         ["sx"] = "sx",
         ["cg"] = "bx-bulb",
         ["et"] = "et",
-        ["p2p"] = "p2p",
         ["pcl"] = "pcl",
         ["bj"] = "bj",
         ["fwq"] = "fwq",
@@ -64,7 +62,6 @@ internal static class SvgIcon
     private static readonly Dictionary<string, string> Paths = new()
     {
 
-        ["ai"] = "M2 16.59L5.59 13H15a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM2 18H1V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H6zm19 2.59V10a2 2 0 0 0-2-2V7a3 3 0 0 1 3 3v12h-1l-4-4H8c-1.24 0-2.3-.75-2.76-1.82l.8-.8C6.21 16.3 7 17 8 17h9.41z",
 
         ["fz"] = "M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2m0 7c2.67 0 8 1.33 8 4v3H4v-3c0-2.67 5.33-4 8-4m0 1.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17c0-.64-3.13-2.1-6.1-2.1",
 

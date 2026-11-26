@@ -966,51 +966,6 @@ public class ModpackService
         return sb.ToString();
     }
 
-    public async Task<List<ModpackInfo>> SampleForAgentAsync(string? category)
-    {
-        var key = SourceModrinth + "|modpack|" + (category ?? "");
-        if (_states.TryGetValue(key, out var st) && st.Items.Count > 0)
-            return new List<ModpackInfo>(st.Items);
-
-        try
-        {
-            var file = CacheFileFor(SourceModrinth, "modpack", category);
-            if (File.Exists(file))
-            {
-                await using var fs = File.OpenRead(file);
-                var disk = await JsonSerializer.DeserializeAsync<DiskCache>(fs, JsonOpts).ConfigureAwait(true);
-                if (disk is { Hits.Count: > 0 }) return disk.Hits;
-            }
-        }
-        catch {   }
-
-        try
-        {
-            var facets = BuildFacets("modpack", category, null, null);
-            var url = $"https://api.modrinth.com/v2/search?limit={PageSize}&offset=0&index=follows&facets={facets}";
-            using var req = new HttpRequestMessage(HttpMethod.Get, url);
-            req.Headers.UserAgent.ParseAdd(UserAgent);
-            using var resp = await Http.SendAsync(req).ConfigureAwait(true);
-            resp.EnsureSuccessStatusCode();
-            await using var stream = await resp.Content.ReadAsStreamAsync().ConfigureAwait(true);
-            using var doc = await JsonDocument.ParseAsync(stream).ConfigureAwait(true);
-            var (items, total) = ParseHits(doc);
-
-            var cst = _states.TryGetValue(key, out var f) && f.Items.Count > 0
-                ? f : _states[key] = new CategoryState();
-            cst.Items = items;
-            cst.Total = total;
-            cst.EndReached = items.Count >= total;
-            _ = DownloadIconsAsync(items);
-            return items;
-        }
-        catch (Exception ex)
-        {
-            AppLog.Warn($"[modpack] agent 抽取候选失败：{ex.Message}");
-            return [];
-        }
-    }
-
     private async Task DownloadIconsAsync(List<ModpackInfo> picks)
     {
         var pending = picks
